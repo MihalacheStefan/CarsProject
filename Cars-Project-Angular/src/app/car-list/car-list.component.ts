@@ -27,4 +27,8 @@ export class CarListComponent implements OnInit {
           console.log(car);
       }
   }
+  deleteCar(car: CarDTO) {
+    this.carService.deleteCar(car)
+          .subscribe();
+}
 }
