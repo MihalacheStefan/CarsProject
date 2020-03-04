@@ -1,0 +1,16 @@
+import { Component, OnInit, Input} from '@angular/core';
+import { EngineDTO } from '../CarDTO';
+
+@Component({
+  selector: 'app-engine-detail',
+  templateUrl: './engine-detail.component.html',
+  styleUrls: ['./engine-detail.component.css']
+})
+export class EngineDetailComponent implements OnInit {
+  @Input() engine: EngineDTO;
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

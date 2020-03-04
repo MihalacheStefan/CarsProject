@@ -1,0 +1,20 @@
+<div *ngIf="car">
+
+    <h2>{{car.Brand | uppercase}} Details</h2>
+    <div (click)="clickChassis()">
+        Chassis
+        <div *ngIf="clickedChassis">    
+            <app-chassis-detail [chassis] = "car.Chassis"></app-chassis-detail>
+        </div>
+       
+    </div>
+    <div (click) = "clickEngine()">
+        Engine
+        <div *ngIf="clickedEngine">
+            <app-engine-detail [engine] = "car.Engine"></app-engine-detail>
+        </div>
+        
+    </div>
+    
+  
+  </div>

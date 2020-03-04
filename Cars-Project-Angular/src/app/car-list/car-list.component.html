@@ -1,1 +1,12 @@
 <p>car-list works!</p>
+
+<h4>{{carList}}</h4>
+
+<ul class="carlist">
+    <li *ngFor="let car of list" (click)="onSelect(car)">
+          {{car.Brand}}
+          <div *ngIf="car == selectedCar">
+                <app-car-detail [car]="selectedCar"></app-car-detail>
+          </div>
+    </li>
+</ul>
