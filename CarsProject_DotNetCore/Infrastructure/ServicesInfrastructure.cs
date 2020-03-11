@@ -10,9 +10,9 @@ using Newtonsoft.Json.Serialization;
 using Repository;
 using Repository.Interfaces.UnitOfWork;
 using Repository.UnitOfWork;
-using Service;
 using Service.Interfaces;
 using Service.Services;
+using Infrastructure.AutoMapper;
 
 namespace Infrastructure
 {

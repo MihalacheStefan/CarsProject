@@ -38,8 +38,10 @@ namespace CarsProject_DotNetCore
             {
                 app.UseDeveloperExceptionPage();
             }
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
             app.UseCors(builder => builder
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
@@ -47,7 +49,6 @@ namespace CarsProject_DotNetCore
                 .AllowCredentials());
 
             app.UseMvc();
-
 
         }
     }

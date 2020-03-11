@@ -19,13 +19,6 @@ namespace Service.Services
             this.mapper = mapper;
         }
 
-        public void DeleteEngine(Guid Id)
-        {
-            Engine engine = this.unitOfWork.Engines.Get(Id);
-            this.unitOfWork.Engines.Remove(engine);
-            this.unitOfWork.Complete();
-        }
-
         public EngineDTO GetEngine(Guid Id)
         {
             Engine engine = this.unitOfWork.Engines.Get(Id) as Engine;
@@ -42,7 +35,25 @@ namespace Service.Services
 
         public void UpdateEngine(EngineDTO engineDTO)
         {
-            throw new NotImplementedException();
+            Engine updatedEngine = this.mapper.Map<Engine>(engineDTO);
+            Engine engine = unitOfWork.Engines.GetByCylindersNumber(updatedEngine.CylindersNumber);
+            if (engine != null)
+            {
+                engine.Description = updatedEngine.Description;
+                engine.Cars = updatedEngine.Cars;
+                this.unitOfWork.Engines.Update(engine);
+                this.unitOfWork.Complete();
+            }
+            else
+            {
+                this.InsertEngine(engineDTO);
+            }
+        }
+        public void DeleteEngine(Guid Id)
+        {
+            Engine engine = this.unitOfWork.Engines.Get(Id) as Engine;
+            this.unitOfWork.Engines.Remove(engine);
+            this.unitOfWork.Complete();
         }
 
     }
