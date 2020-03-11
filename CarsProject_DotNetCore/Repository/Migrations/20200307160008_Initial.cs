@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repository.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,7 +37,8 @@ namespace Repository.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(nullable: false)
+                    UserId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -49,22 +50,22 @@ namespace Repository.Migrations
                 columns: table => new
                 {
                     CarId = table.Column<Guid>(nullable: false),
-                    ChassisIdF = table.Column<Guid>(nullable: false),
+                    ChassisId = table.Column<Guid>(nullable: false),
                     Brand = table.Column<string>(nullable: true),
-                    EngineIdF = table.Column<Guid>(nullable: false)
+                    EngineId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cars", x => x.CarId);
                     table.ForeignKey(
-                        name: "FK_Cars_Chassiss_ChassisIdF",
-                        column: x => x.ChassisIdF,
+                        name: "FK_Cars_Chassiss_ChassisId",
+                        column: x => x.ChassisId,
                         principalTable: "Chassiss",
                         principalColumn: "ChassisId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Cars_Engines_EngineIdF",
-                        column: x => x.EngineIdF,
+                        name: "FK_Cars_Engines_EngineId",
+                        column: x => x.EngineId,
                         principalTable: "Engines",
                         principalColumn: "EngineId",
                         onDelete: ReferentialAction.Cascade);
@@ -74,12 +75,13 @@ namespace Repository.Migrations
                 name: "CarUser",
                 columns: table => new
                 {
+                    CarUserId = table.Column<Guid>(nullable: false),
                     CarId = table.Column<Guid>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CarUser", x => new { x.CarId, x.UserId });
+                    table.PrimaryKey("PK_CarUser", x => x.CarUserId);
                     table.ForeignKey(
                         name: "FK_CarUser_Cars_CarId",
                         column: x => x.CarId,
@@ -95,14 +97,19 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_ChassisIdF",
+                name: "IX_Cars_ChassisId",
                 table: "Cars",
-                column: "ChassisIdF");
+                column: "ChassisId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_EngineIdF",
+                name: "IX_Cars_EngineId",
                 table: "Cars",
-                column: "EngineIdF");
+                column: "EngineId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarUser_CarId",
+                table: "CarUser",
+                column: "CarId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CarUser_UserId",

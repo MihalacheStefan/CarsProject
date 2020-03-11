@@ -7,9 +7,11 @@ export class CarDTO {
 export class ChassisDTO {
     Description: string;
     CodeNumber: string;
+    Cars: CarDTO[];
 }
 
 export class EngineDTO {
     Decription: string;
     CylindersNr: number;
+    Cars: CarDTO[];
 }

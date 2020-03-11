@@ -1,5 +1,5 @@
-﻿using Domain;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Domain.Models;
 
 
 namespace Repository
@@ -8,10 +8,12 @@ namespace Repository
     {
         public AplicationContext(DbContextOptions<AplicationContext> options) : base(options)
         {
+           // this.Configuration.LazyLoadingEnabled = false;
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS; Initial Catalog=CarsProjectDB;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS; Initial Catalog=CarsProjectDB;Integrated Security=True")
+                .UseLazyLoadingProxies();
         }
 
         public virtual DbSet<Car> Cars { get; set; }
@@ -21,21 +23,16 @@ namespace Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Chassis>()
+                .HasMany(c => c.Cars)
+                .WithOne(e => e.Chassis)
+                .IsRequired();
 
-            modelBuilder.Entity<CarUser>()
-            .HasKey(t => new { t.CarId, t.UserId });
+            modelBuilder.Entity<Engine>()
+                .HasMany(c => c.Cars)
+                .WithOne(e => e.Engine)
+                .IsRequired();
 
-            modelBuilder.Entity<CarUser>()
-             .HasOne(pt => pt.Car)
-             .WithMany(p => p.CarsUsers)
-             .HasForeignKey(pt => pt.CarId);
-
-            modelBuilder.Entity<CarUser>()
-                .HasOne(pt => pt.User)
-                .WithMany(t => t.CarsUsers)
-                .HasForeignKey(pt => pt.UserId);
-         
         }
     }
 }

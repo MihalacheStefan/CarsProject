@@ -1,20 +1,20 @@
 ﻿using Repository.Repositories;
-using Repository.Interfaces;
-
+using Repository.Interfaces.UnitOfWork;
+using Repository.Interfaces.Repositories;
 
 namespace Repository.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly AplicationContext _context;
+        private readonly AplicationContext context;
 
         public UnitOfWork(AplicationContext context)
         {
-            _context = context;
-            Cars = new CarRepository(_context);
-            Chassiss = new ChassisRepository(_context);
-            Engines = new EngineRepository(_context);
-            Users = new UserRepository(_context);
+            this.context = context;
+            Cars = new CarRepository(this.context);
+            Chassiss = new ChassisRepository(this.context);
+            Engines = new EngineRepository(this.context);
+            Users = new UserRepository(this.context);
         }
         public ICarRepository Cars { get; private set; }
         public IChassisRepository Chassiss { get; private set; }
@@ -23,11 +23,11 @@ namespace Repository.UnitOfWork
 
         public int Complete()
         {
-            return _context.SaveChanges();
+            return this.context.SaveChanges();
         }
         public void Dispose()
         {
-            _context.Dispose();
+            this.context.Dispose();
         }
     }
 }

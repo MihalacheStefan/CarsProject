@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CarService } from '../car.service';
-import { CarDTO } from '../CarDTO';
+import { CarService } from '../services/car.service';
+import { CarDTO, ChassisDTO } from '../DTOs/DTOs';
+import { ChassisService } from '../services/chassis.service';
 
 @Component({
   selector: 'app-car-list',
@@ -14,11 +15,23 @@ export class CarListComponent implements OnInit {
                    Engine: {Description: 'EngineDescription', CylindersNr: 3 }},
                    {Brand: 'Opel', Chassis: {Description: 'Opel-Description', CodeNumber: '1234'},
                    Engine: {Description: 'EngineDescription', CylindersNr: 5 }}];
-  constructor(private carService: CarService) { }
+  constructor(private carService: CarService,
+              private chassisService: ChassisService) { }
 
+
+
+  chassisDTO: ChassisDTO = {Description: 'T6000', CodeNumber: '114', Cars: []};
   ngOnInit() {
-    this.carService.getCars().subscribe(data => this.carList = data );
+    // this.chassisService.getChassis('C8501896-21C9-4165-CA00-08D7C2B0A910').subscribe(data => {
+    //  this.chassisService.addChassis(this.chassisDTO).subscribe(data => {
+    //  this.chassisService.updateChassis(this.chassisDTO).subscribe(data => {
+      this.chassisService.deleteChassis('855E78E2-8B21-4C94-B589-DFBEDD67D594').subscribe(data => {
+        console.log('Raspuns', data);
+    });
   }
+
+
+
   onSelect(car: CarDTO) {
       if (car === this.selectedCar) {
           // this.selectedCar = null;
@@ -27,6 +40,7 @@ export class CarListComponent implements OnInit {
           console.log(car);
       }
   }
+
   deleteCar(car: CarDTO) {
     this.carService.deleteCar(car)
           .subscribe();

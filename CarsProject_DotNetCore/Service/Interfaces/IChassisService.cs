@@ -1,6 +1,14 @@
-﻿using Domain;
+﻿using System;
+using Domain.Models;
 using Service.DTO;
-using System;
+
+// Prima oara cele din SYstem
+// Dupa ordonare dupa layere
+
+    // System
+    // Service
+    // Repo
+    // ...
 
 
 namespace Service.Interfaces

@@ -1,6 +1,6 @@
-﻿using Domain;
+﻿using System;
+using Domain.Models;
 using Service.DTO;
-using System;
 
 
 namespace Service.Interfaces

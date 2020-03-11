@@ -1,35 +1,40 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Repository.Interfaces;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Repository.Interfaces.Repositories;
 
 
 namespace Repository.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly DbContext Context;
+        protected readonly DbContext context;
         public Repository(DbContext context)
         {
-            Context = context;
+            this.context = context;
         }
 
         public TEntity Get(Guid id)
         {
-            return Context.Set<TEntity>().Find(id);
+            return this.context.Set<TEntity>().Find(id);
         }
         public IEnumerable<TEntity> GetAll()
         {
-            return Context.Set<TEntity>().ToList();
+            return this.context.Set<TEntity>().ToList();
         }
         public void Add(TEntity entity)
         {
-            Context.Set<TEntity>().Add(entity);
+            this.context.Set<TEntity>().Add(entity);
+        }
+        public void Update(TEntity entity)
+        {
+            this.context.Set<TEntity>().Update(entity);
         }
         public void Remove(TEntity entity)
         {
-            Context.Set<TEntity>().Remove(entity);
+            this.context.Set<TEntity>().Remove(entity);
         }
+        
     }
 }

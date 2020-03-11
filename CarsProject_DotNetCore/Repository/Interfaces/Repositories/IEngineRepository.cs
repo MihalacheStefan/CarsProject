@@ -1,7 +1,7 @@
-﻿using Domain;
+﻿using Domain.Models;
 
 
-namespace Repository.Interfaces
+namespace Repository.Interfaces.Repositories
 {
     public interface IEngineRepository : IRepository<Engine>
     {

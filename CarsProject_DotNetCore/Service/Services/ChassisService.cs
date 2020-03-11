@@ -1,50 +1,61 @@
-﻿using AutoMapper;
-using Domain;
-using Repository;
-using Repository.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
+using Domain.Models;
+using Repository.Interfaces.UnitOfWork;
 using Service.DTO;
 using Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace Service.Services
 {
     public class ChassisService : IChassisService
     {
-        private IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        private IUnitOfWork unitOfWork;
+        private readonly IMapper mapper;
 
         public ChassisService( IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
-
-        public void DeleteChassis(Guid Id)
-        {
-            Chassis chassis = _unitOfWork.Chassiss.Get(Id);
-            _unitOfWork.Chassiss.Remove(chassis);
-            _unitOfWork.Complete();
+            this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
         }
 
         public ChassisDTO GetChassis(Guid Id)
         {
-            Chassis chassis = _unitOfWork.Chassiss.Get(Id) as Chassis;
-            return _mapper.Map<ChassisDTO>(chassis);
+            Chassis chassis = this.unitOfWork.Chassiss.Get(Id) as Chassis;
+            return this.mapper.Map<ChassisDTO>(chassis);
         }
 
         public void InsertChassis(ChassisDTO chassisDTO)
         {
-            Chassis chassis = _mapper.Map<Chassis>(chassisDTO);
+            Chassis chassis = this.mapper.Map<Chassis>(chassisDTO);
             chassis.ChassisId = Guid.NewGuid();
-            _unitOfWork.Chassiss.Add(chassis);
-            _unitOfWork.Complete();
+            this.unitOfWork.Chassiss.Add(chassis);
+            this.unitOfWork.Complete();
         }
 
         public void UpdateChassis(ChassisDTO chassisDTO)
         {
-            throw new NotImplementedException();
+            Chassis updatedChassis = this.mapper.Map<Chassis>(chassisDTO);
+            Chassis chassis = unitOfWork.Chassiss.GetByCodeNumber(updatedChassis.CodeNumber);
+            if (chassis != null)
+            {
+                chassis.Description = updatedChassis.Description;
+                chassis.Cars = updatedChassis.Cars;
+                this.unitOfWork.Chassiss.Update(chassis);
+                this.unitOfWork.Complete();
+            }
+            else
+            {
+                this.InsertChassis(chassisDTO);
+            }
+        }
+
+        public void DeleteChassis(Guid Id)
+        {
+            Chassis chassis = this.unitOfWork.Chassiss.Get(Id) as Chassis;
+            this.unitOfWork.Chassiss.Remove(chassis);
+            this.unitOfWork.Complete();
         }
     }
 }

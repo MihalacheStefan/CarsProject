@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { EngineDTO } from '../CarDTO';
+import { EngineDTO } from '../DTOs/DTOs';
 
 @Component({
   selector: 'app-engine-detail',

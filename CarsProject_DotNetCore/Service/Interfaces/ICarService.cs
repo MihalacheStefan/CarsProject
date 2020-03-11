@@ -1,7 +1,7 @@
-﻿using Domain;
-using Service.DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Domain.Models;
+using Service.DTO;
 
 namespace Service.Interfaces
 {

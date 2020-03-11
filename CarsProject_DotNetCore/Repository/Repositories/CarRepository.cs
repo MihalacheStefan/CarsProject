@@ -1,6 +1,5 @@
-﻿using Domain;
-using Repository.Interfaces;
-
+﻿using Domain.Models;
+using Repository.Interfaces.Repositories;
 
 namespace Repository.Repositories
 {
@@ -10,7 +9,7 @@ namespace Repository.Repositories
 
         public AplicationContext AplicationContext
         {
-            get { return Context as AplicationContext; }
+            get { return context as AplicationContext; }
         }
     }
 }

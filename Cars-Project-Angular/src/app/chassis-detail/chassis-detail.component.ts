@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { ChassisDTO } from '../CarDTO';
+import { ChassisDTO } from '../DTOs/DTOs';
 
 @Component({
   selector: 'app-chassis-detail',

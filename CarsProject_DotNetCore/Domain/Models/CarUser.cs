@@ -4,17 +4,23 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Domain
+namespace Domain.Models
 {
     public class CarUser
     {
-        [Required] 
+        [Key]
+        public Guid CarUserId { get; set; }
+
+        [Required]
+        [ForeignKey("Car")]
         public Guid CarId { get; set; }
-        [ForeignKey("CarId")]
-        public Car Car { get; set; }
-        [Required] 
+
+        public virtual Car Car { get; set; }
+
+        [Required]
+        [ForeignKey("User")]
         public Guid UserId { get; set; }
-        [ForeignKey("UserId")]
-        public User User { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

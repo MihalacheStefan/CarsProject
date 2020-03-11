@@ -26,7 +26,8 @@ namespace Repository.Migrations
 
                     b.Property<string>("Brand");
 
-                    b.Property<Guid>("ChassisId");
+                    b.Property<Guid?>("ChassisId")
+                        .IsRequired();
 
                     b.Property<Guid>("EngineId");
 
@@ -41,11 +42,16 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Domain.CarUser", b =>
                 {
+                    b.Property<Guid>("CarUserId")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<Guid>("CarId");
 
                     b.Property<Guid>("UserId");
 
-                    b.HasKey("CarId", "UserId");
+                    b.HasKey("CarUserId");
+
+                    b.HasIndex("CarId");
 
                     b.HasIndex("UserId");
 

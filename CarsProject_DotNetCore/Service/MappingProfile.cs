@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Domain;
+using Domain.Models;
 using Service.DTO;
 
 
@@ -29,8 +29,7 @@ namespace Service
             CreateMap<Engine, EngineDTO>();
             CreateMap<EngineDTO, Engine>();
 
-            CreateMap<Chassis, ChassisDTO>();
-            CreateMap<ChassisDTO, Chassis>();
+            CreateMap<Chassis, ChassisDTO>().ForMember(dest => dest.Cars, opt => opt.MapFrom(src => src.Cars)).ReverseMap();
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using Domain;
-using Repository.Interfaces;
-
+﻿using Domain.Models;
+using Repository.Interfaces.Repositories;
+using System.Linq;
 
 namespace Repository.Repositories
 {
@@ -10,7 +10,12 @@ namespace Repository.Repositories
 
         public AplicationContext AplicationContext
         {
-            get { return Context as AplicationContext; }
+            get { return context as AplicationContext; }
+        }
+
+        public Chassis GetByCodeNumber(string codeNumber)
+        {
+            return this.context.Set<Chassis>().Where(x => x.CodeNumber == codeNumber).FirstOrDefault();
         }
     }
 }

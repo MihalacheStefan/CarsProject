@@ -10,8 +10,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AplicationContext))]
-    [Migration("20200303113713_Fix-Error-Car-User")]
-    partial class FixErrorCarUser
+    [Migration("20200307160008_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,8 @@ namespace Repository.Migrations
 
                     b.Property<string>("Brand");
 
-                    b.Property<Guid>("ChassisId");
+                    b.Property<Guid?>("ChassisId")
+                        .IsRequired();
 
                     b.Property<Guid>("EngineId");
 
@@ -43,11 +44,16 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Domain.CarUser", b =>
                 {
+                    b.Property<Guid>("CarUserId")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<Guid>("CarId");
 
                     b.Property<Guid>("UserId");
 
-                    b.HasKey("CarId", "UserId");
+                    b.HasKey("CarUserId");
+
+                    b.HasIndex("CarId");
 
                     b.HasIndex("UserId");
 
@@ -86,6 +92,8 @@ namespace Repository.Migrations
                 {
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
 
                     b.HasKey("UserId");
 
