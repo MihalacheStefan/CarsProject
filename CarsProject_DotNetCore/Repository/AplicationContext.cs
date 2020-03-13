@@ -8,7 +8,6 @@ namespace Repository
     {
         public AplicationContext(DbContextOptions<AplicationContext> options) : base(options)
         {
-           // this.Configuration.LazyLoadingEnabled = false;
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

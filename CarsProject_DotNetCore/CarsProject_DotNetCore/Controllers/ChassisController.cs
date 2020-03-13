@@ -19,8 +19,7 @@ namespace CarsProject_DotNetCore.Controllers
         [HttpGet("{id}")]
         public ActionResult<ChassisDTO> Get(string id)
         {
-            var chassis = this.chassisService.GetChassis(Guid.Parse(id));
-            return chassis;
+            return this.chassisService.GetChassis(Guid.Parse(id));
         }
 
         [HttpPost]

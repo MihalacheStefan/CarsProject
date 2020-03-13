@@ -11,7 +11,7 @@ export class ChassisDTO {
 }
 
 export class EngineDTO {
-    Decription: string;
-    CylindersNr: number;
+    Description: string;
+    CylindersNumber: number;
     Cars: CarDTO[];
 }
