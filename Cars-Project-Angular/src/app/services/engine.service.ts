@@ -8,7 +8,7 @@ import { EngineDTO } from '../DTOs/DTOs';
     providedIn: 'root'
 })
 export class EngineService {
-    private apiUrl = 'http://localhost:61109/api/engine';
+    private apiUrl = 'http://localhost:61109/api/engines';
     private httpOptions = {
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
@@ -18,7 +18,7 @@ export class EngineService {
       };
     constructor(private http: HttpClient) {  }
 
-    getEngine(id: string) {
+    getEngine(id: string):  Observable<EngineDTO> {
         const currentUrl = `${this.apiUrl}/${id}`;
         return this.http.get<EngineDTO>(currentUrl, this.httpOptions);
     }

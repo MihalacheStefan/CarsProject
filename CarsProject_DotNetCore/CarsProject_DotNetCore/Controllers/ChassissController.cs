@@ -7,11 +7,11 @@ namespace CarsProject_DotNetCore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ChassisController : Controller
+    public class ChassissController : Controller
     {
         private readonly IChassisService chassisService;
 
-        public ChassisController(IChassisService chassisService)
+        public ChassissController(IChassisService chassisService)
         {
             this.chassisService = chassisService;
         }

@@ -24,18 +24,19 @@ export class CarListComponent implements OnInit {
 
   chassisDTO: ChassisDTO = {Description: 'T6000', CodeNumber: '114', Cars: []};
   engineDTO: EngineDTO = {Description: 'OPEL-Super', CylindersNumber: 9, Cars: []};
+  carDTO: CarDTO = {Brand: 'Bugatti', Chassis: {Description: 'Bugatti-Chassis', CodeNumber: '50', Cars: []},
+                    Engine: {Description: 'Bugatti-Engine', CylindersNumber: 13, Cars: []}};
+  
   ngOnInit() {
-    //this.chassisService.getChassis('C8501896-21C9-4165-CA00-08D7C2B0A910').subscribe(data => {
-    //  this.chassisService.addChassis(this.chassisDTO).subscribe(data => {
-    //  this.chassisService.updateChassis(this.chassisDTO).subscribe(data => {
-    // this.chassisService.deleteChassis('855E78E2-8B21-4C94-B589-DFBEDD67D594').subscribe(data => {
-
-    //this.engineService.getEngine('34A51B7F-B01D-404C-CF46-08D7C2B0A915').subscribe(data =>{
-    //  this.engineService.addEngine(this.engineDTO).subscribe(data =>{
-    //   this.engineService.updateEngine(this.engineDTO).subscribe(data =>{
-      this.engineService.deleteEngine('7BD94556-3A22-4781-9555-33C0EE381C42').subscribe(data =>{
-        console.log('Raspuns', data);
-    });
+    
+      // this.carService.getCar('9F749DDA-2644-4CD7-57C2-08D7C7979A6D').subscribe(data => {
+      //     this.carDTO.Chassis.Cars.push(data);
+      //     console.log('carDTO modified: ', this.carDTO);
+      //     // this.carService.updateCar(this.carDTO).subscribe(data =>{
+      //     //     console.log('Raspuns', data);
+      //     // });
+      // });
+  
   }
 
 
@@ -49,8 +50,9 @@ export class CarListComponent implements OnInit {
       }
   }
 
-  deleteCar(car: CarDTO) {
-    this.carService.deleteCar(car)
-          .subscribe();
-}
+  // deleteCar(car: CarDTO) {
+  //   this.carService.deleteCar(car)
+  //         .subscribe();
+  // }
+
 }

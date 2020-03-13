@@ -19,14 +19,16 @@ namespace Infrastructure.AutoMapper
                 .ForPath(dest => dest.Engine.CylindersNumber,
                             opt => opt.MapFrom(src => src.Engine.CylindersNumber))
                 .ForPath(dest => dest.Engine.Description,
-                            opt => opt.MapFrom(src => src.Engine.Description));
+                            opt => opt.MapFrom(src => src.Engine.Description))
+                .ReverseMap();
 
-            CreateMap<CarDTO, Car>();
+            CreateMap<Engine, EngineDTO>()
+                .ForMember(dest => dest.Cars, opt => opt.MapFrom(src => src.Cars))
+                .ReverseMap();
 
-            CreateMap<Engine, EngineDTO>().ForMember(dest => dest.Cars, opt => opt.MapFrom(src => src.Cars)).ReverseMap();
-            //CreateMap<EngineDTO, Engine>();
-
-            CreateMap<Chassis, ChassisDTO>().ForMember(dest => dest.Cars, opt => opt.MapFrom(src => src.Cars)).ReverseMap();
+            CreateMap<Chassis, ChassisDTO>()
+                .ForMember(dest => dest.Cars, opt => opt.MapFrom(src => src.Cars))
+                .ReverseMap();
         }
     }
 }

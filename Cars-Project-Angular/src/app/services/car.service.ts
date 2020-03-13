@@ -7,26 +7,35 @@ import { CarDTO } from '../DTOs/DTOs';
   providedIn: 'root'
 })
 export class CarService {
-  private configUrl = 'http://localhost:61109/api/values/C8501896-21C9-4165-CA00-08D7C2B0A910';
+  private apiUrl = 'http://localhost:61109/api/cars';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
+      'Accept': 'application/json',
+      'withCredentials': 'true'
     })
   };
   constructor(private http: HttpClient) { }
 
-  getCars(): Observable<CarDTO> {
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Accept': 'application/json',
-        'withCredentials': 'true'
-      })
-    };
-    return this.http.get<CarDTO>(this.configUrl, httpOptions);
+  getCars(): Observable<CarDTO[]> {
+    return this.http.get<CarDTO[]>(this.apiUrl, this.httpOptions);
   }
-  deleteCar(carDTO: CarDTO): Observable<{}>  {
-    return this.http.put(this.configUrl, carDTO);
+
+  getCar(id: string): Observable<CarDTO> {
+    const currentUrl = `${this.apiUrl}/${id}`;
+    return this.http.get<CarDTO>(currentUrl, this.httpOptions);
+  }
+
+  addCar(carDTO: CarDTO): Observable<CarDTO> {
+    return this.http.post<CarDTO>(this.apiUrl, carDTO, this.httpOptions);
+  }
+
+  updateCar(carDTO: CarDTO): Observable<CarDTO>  {
+    return this.http.put<CarDTO>(this.apiUrl, carDTO, this.httpOptions);
+  }
+
+  deleteCar(id: string) {
+    const currentUrl = `${this.apiUrl}/${id}`;
+    return this.http.delete(currentUrl, this.httpOptions);
   }
 }

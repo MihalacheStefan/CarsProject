@@ -21,7 +21,7 @@ namespace Service.Services
 
         public EngineDTO GetEngine(Guid Id)
         {
-            Engine engine = this.unitOfWork.Engines.Get(Id) as Engine;
+            Engine engine = this.unitOfWork.Engines.Get(Id);
             return this.mapper.Map<EngineDTO>(engine);
         }
 
@@ -51,7 +51,7 @@ namespace Service.Services
         }
         public void DeleteEngine(Guid Id)
         {
-            Engine engine = this.unitOfWork.Engines.Get(Id) as Engine;
+            Engine engine = this.unitOfWork.Engines.Get(Id);
             this.unitOfWork.Engines.Remove(engine);
             this.unitOfWork.Complete();
         }

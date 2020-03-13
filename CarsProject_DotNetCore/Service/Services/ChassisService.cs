@@ -21,7 +21,7 @@ namespace Service.Services
 
         public ChassisDTO GetChassis(Guid Id)
         {
-            Chassis chassis = this.unitOfWork.Chassiss.Get(Id) as Chassis;
+            Chassis chassis = this.unitOfWork.Chassiss.Get(Id);
             return this.mapper.Map<ChassisDTO>(chassis);
         }
 
@@ -52,7 +52,7 @@ namespace Service.Services
 
         public void DeleteChassis(Guid Id)
         {
-            Chassis chassis = this.unitOfWork.Chassiss.Get(Id) as Chassis;
+            Chassis chassis = this.unitOfWork.Chassiss.Get(Id);
             this.unitOfWork.Chassiss.Remove(chassis);
             this.unitOfWork.Complete();
         }

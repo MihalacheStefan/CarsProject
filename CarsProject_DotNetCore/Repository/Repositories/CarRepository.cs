@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using Repository.Interfaces.Repositories;
+using System.Linq;
 
 namespace Repository.Repositories
 {
@@ -10,6 +11,11 @@ namespace Repository.Repositories
         public AplicationContext AplicationContext
         {
             get { return context as AplicationContext; }
+        }
+
+        public Car GetByBrand(string brand)
+        {
+            return this.context.Set<Car>().Where(x => x.Brand == brand).FirstOrDefault();
         }
     }
 }

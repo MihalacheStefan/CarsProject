@@ -7,11 +7,11 @@ namespace CarsProject_DotNetCore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EngineController : Controller
+    public class EnginesController : Controller
     {
         private readonly IEngineService engineService;
 
-        public EngineController(IEngineService engineService)
+        public EnginesController(IEngineService engineService)
         {
             this.engineService = engineService;
         }

@@ -8,7 +8,7 @@ import { ChassisDTO } from '../DTOs/DTOs';
   providedIn: 'root'
 })
 export class ChassisService {
-  private apiUrl = 'http://localhost:61109/api/chassis';
+  private apiUrl = 'http://localhost:61109/api/chassiss';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
@@ -18,7 +18,7 @@ export class ChassisService {
   };
   constructor(private http: HttpClient) { }
 
-  getChassis(id: string) {
+  getChassis(id: string): Observable<ChassisDTO> {
     const currentUrl = `${this.apiUrl}/${id}`;
     return this.http.get<ChassisDTO>(currentUrl, this.httpOptions);
   }
