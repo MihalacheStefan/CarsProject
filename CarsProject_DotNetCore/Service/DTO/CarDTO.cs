@@ -11,6 +11,7 @@ namespace Service.DTO
         public string ChassisCodeNumber { get; set; }
         public string EngineDescription { get; set; }
         public int EngineCylindersNumber { get; set; }
+        public ICollection<string> UsersName { get; set; }
 
     }
 }

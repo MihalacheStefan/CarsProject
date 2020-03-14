@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from '../services/car.service';
-import { CarDTO, ChassisDTO, EngineDTO } from '../DTOs/DTOs';
+import { CarDTO, ChassisDTO, EngineDTO, UserDTO } from '../DTOs/DTOs';
 import { ChassisService } from '../services/chassis.service';
 import { EngineService } from '../services/engine.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-car-list',
@@ -18,31 +19,28 @@ export class CarListComponent implements OnInit {
                    Engine: {Description: 'EngineDescription', CylindersNr: 5 }}];
   constructor(private carService: CarService,
               private chassisService: ChassisService,
-              private engineService: EngineService) { }
+              private engineService: EngineService,
+              private userService: UserService) { }
 
 
 
-  chassisDTO: ChassisDTO = {Description: 'T6000', CodeNumber: '114', Brands: ['Carapace']};
+//  chassisDTO: ChassisDTO = {Description: 'T6000', CodeNumber: '114', Brands: ['Carapace']};
  
-  carDTO: CarDTO = {Brand: 'Bugatti', ChassisDescription: 'Extreme', ChassisCodeNumber: '500',
-                    EngineDescription: 'Bugatti-Engine', EngineCylindersNumber: 13};
+    carDTO: CarDTO = {Brand: 'Bugatti', ChassisDescription: 'Extreme', ChassisCodeNumber: '500',
+                      EngineDescription: 'Bugatti-Engine', EngineCylindersNumber: 13, UsersName: ['Ionel']};
 
-  engineDTO: EngineDTO = {Description: 'Motorola', CylindersNumber: 80, Brands: ['Carapace']};
+//  engineDTO: EngineDTO = {Description: 'Motorola', CylindersNumber: 80, Brands: ['Carapace']};
   
-  ngOnInit() {
+    userDTO: UserDTO = {Name: 'Ionel', Brands: ['Carapace']};
 
-      // this.carService.getCar('9F749DDA-2644-4CD7-57C2-08D7C7979A6D').subscribe(data => {
-      //     this.carDTO.Chassis.Cars.push(data);
-      //     console.log('carDTO modified: ', this.carDTO);
-      //     // this.carService.updateCar(this.carDTO).subscribe(data =>{
-      //     //     console.log('Raspuns', data);
-      //     // });
-      // });
+  ngOnInit() {
       // this.carService.updateCar(this.carDTO).subscribe(data =>{
       //      console.log('Raspuns', data);
       // });
       //this.carService.getCars().subscribe(data => console.log('Raspuns', data));
-      this.chassisService.updateChassis(this.chassisDTO).subscribe(data => console.log('Raspuns', data));
+     // this.chassisService.updateChassis(this.chassisDTO).subscribe(data => console.log('Raspuns', data));
+    //  this.userService.updateUser(this.userDTO).subscribe(data => console.log('Raspuns', data));
+    this.userService.deleteUser('F54E4252-C645-451C-98AD-1936F33271BC').subscribe(data => console.log('Raspuns', data));
   }
 
 

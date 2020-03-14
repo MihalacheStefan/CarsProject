@@ -4,6 +4,7 @@ export class CarDTO {
     ChassisCodeNumber: string;
     EngineDescription: string;
     EngineCylindersNumber: number;
+    UsersName: string[];
 }
 
 export class ChassisDTO {
@@ -15,5 +16,10 @@ export class ChassisDTO {
 export class EngineDTO {
     Description: string;
     CylindersNumber: number;
+    Brands: string[];
+}
+
+export class UserDTO {
+    Name: string;
     Brands: string[];
 }

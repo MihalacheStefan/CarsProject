@@ -50,7 +50,7 @@ namespace Infrastructure
 
         }
 
-        private void RegisterBuilder()
+        private void RegisterAutofacBuilder()
         {
             this.builder.Populate(this.services);
 
@@ -72,10 +72,14 @@ namespace Infrastructure
                 new EngineService(c.Resolve<IUnitOfWork>(), this.mapper))
                 .As<IEngineService>();
 
+            this.builder.Register((c, p) =>
+                new UserService(c.Resolve<IUnitOfWork>(), this.mapper))
+                .As<IUserService>();
+
         }
         public void CreateContainer()
         {
-            RegisterBuilder();
+            this.RegisterAutofacBuilder();
             this.container = this.builder.Build();
         }
 

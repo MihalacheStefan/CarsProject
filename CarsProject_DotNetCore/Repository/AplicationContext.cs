@@ -16,6 +16,7 @@ namespace Repository
         }
 
         public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<CarUser> CarsUsers { get; set; }
         public virtual DbSet<Chassis> Chassiss { get; set; }
         public virtual DbSet<Engine> Engines { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -41,9 +42,12 @@ namespace Repository
                 .IsRequired();
 
             modelBuilder.Entity<Engine>()
-                .HasIndex(c => c.CylindersNumber)
+                .HasIndex(e => e.CylindersNumber)
                 .IsUnique();
 
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Name)
+                .IsUnique();
         }
     }
 }

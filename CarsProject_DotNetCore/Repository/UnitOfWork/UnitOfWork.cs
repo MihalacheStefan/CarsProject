@@ -17,6 +17,7 @@ namespace Repository.UnitOfWork
             Users = new UserRepository(this.context);
         }
         public ICarRepository Cars { get; private set; }
+        public ICarUserRepository CarsUsers { get; private set; }
         public IChassisRepository Chassiss { get; private set; }
         public IEngineRepository Engines { get; private set; }
         public IUserRepository Users { get; private set; }

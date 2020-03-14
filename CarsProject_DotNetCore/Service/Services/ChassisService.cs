@@ -63,16 +63,16 @@ namespace Service.Services
 
         private ICollection<Car> GetCarsByBrand(ICollection<string> Brands)
         {
-            ICollection<Car> Cars = new List<Car>();
+            ICollection<Car> cars = new List<Car>();
             foreach (var brand in Brands)
             {
                 var car = this.unitOfWork.Cars.GetByBrand(brand);
                 if (car != null)
-                    Cars.Add(car);
+                    cars.Add(car);
                 else
                     throw new Exception("Bad Request parameters");
             }
-            return Cars;
+            return cars;
         }
 
     }

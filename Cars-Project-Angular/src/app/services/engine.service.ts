@@ -18,6 +18,10 @@ export class EngineService {
       };
     constructor(private http: HttpClient) {  }
 
+    getEngines(): Observable<EngineDTO[]> {
+        return this.http.get<EngineDTO[]>(this.apiUrl, this.httpOptions);
+    }
+
     getEngine(id: string):  Observable<EngineDTO> {
         const currentUrl = `${this.apiUrl}/${id}`;
         return this.http.get<EngineDTO>(currentUrl, this.httpOptions);
