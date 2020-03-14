@@ -9,6 +9,7 @@ namespace Repository.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
+        private int NumberOfEntities_getAll = 10;
         protected readonly DbContext context;
         public Repository(DbContext context)
         {
@@ -21,7 +22,7 @@ namespace Repository.Repositories
         }
         public IEnumerable<TEntity> GetAll()
         {
-            return this.context.Set<TEntity>().ToList();
+            return this.context.Set<TEntity>().Take(this.NumberOfEntities_getAll).ToList();  // Add OrderBy(date) before Take method
         }
         public void Add(TEntity entity)
         {

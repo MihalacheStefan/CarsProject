@@ -1,4 +1,5 @@
 ﻿using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using Repository.Interfaces.Repositories;
 using System.Linq;
 
@@ -6,7 +7,9 @@ namespace Repository.Repositories
 {
     public class CarRepository : Repository<Car>, ICarRepository
     {
-        public CarRepository(AplicationContext context) : base(context) { } 
+        public CarRepository(AplicationContext context) : base(context)
+        {
+        } 
 
         public AplicationContext AplicationContext
         {
@@ -15,7 +18,7 @@ namespace Repository.Repositories
 
         public Car GetByBrand(string brand)
         {
-            return this.context.Set<Car>().Where(x => x.Brand == brand).FirstOrDefault();
+            return this.context.Set<Car>().Where(x => x.Brand == brand).SingleOrDefault();
         }
     }
 }

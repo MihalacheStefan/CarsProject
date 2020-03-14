@@ -15,7 +15,7 @@ namespace Repository.Repositories
 
         public Chassis GetByCodeNumber(string codeNumber)
         {
-            return this.context.Set<Chassis>().Where(x => x.CodeNumber == codeNumber).FirstOrDefault();
+            return this.context.Set<Chassis>().Where(x => x.CodeNumber == codeNumber).SingleOrDefault();
         }
     }
 }

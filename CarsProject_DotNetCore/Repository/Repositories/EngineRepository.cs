@@ -15,7 +15,7 @@ namespace Repository.Repositories
 
         public Engine GetByCylindersNumber(int cylindersNumber)
         {
-            return this.context.Set<Engine>().Where(x => x.CylindersNumber == cylindersNumber).FirstOrDefault();
+            return this.context.Set<Engine>().Where(x => x.CylindersNumber == cylindersNumber).SingleOrDefault();
         }
     }
 }

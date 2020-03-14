@@ -22,15 +22,27 @@ namespace Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Car>()
+                .HasIndex(c => c.Brand)
+                .IsUnique();
+
             modelBuilder.Entity<Chassis>()
                 .HasMany(c => c.Cars)
                 .WithOne(e => e.Chassis)
                 .IsRequired();
 
+            modelBuilder.Entity<Chassis>()
+                .HasIndex(c => c.CodeNumber)
+                .IsUnique();
+
             modelBuilder.Entity<Engine>()
                 .HasMany(c => c.Cars)
                 .WithOne(e => e.Engine)
                 .IsRequired();
+
+            modelBuilder.Entity<Engine>()
+                .HasIndex(c => c.CylindersNumber)
+                .IsUnique();
 
         }
     }
