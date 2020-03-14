@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Service.DTO;
 using Service.Interfaces;
@@ -14,6 +16,12 @@ namespace CarsProject_DotNetCore.Controllers
         public ChassissController(IChassisService chassisService)
         {
             this.chassisService = chassisService;
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<ChassisDTO>> GetAll()
+        {
+            return this.chassisService.GetChassiss().ToList();
         }
 
         [HttpGet("{id}")]

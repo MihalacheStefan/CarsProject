@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Service.DTO;
 using Service.Interfaces;
@@ -14,6 +16,12 @@ namespace CarsProject_DotNetCore.Controllers
         public EnginesController(IEngineService engineService)
         {
             this.engineService = engineService;
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<EngineDTO>> GetAll()
+        {
+            return this.engineService.GetEngines().ToList();
         }
 
         [HttpGet("{id}")]

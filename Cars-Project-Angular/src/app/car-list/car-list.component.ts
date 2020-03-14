@@ -22,13 +22,15 @@ export class CarListComponent implements OnInit {
 
 
 
-  chassisDTO: ChassisDTO = {Description: 'T6000', CodeNumber: '114', Cars: []};
-  engineDTO: EngineDTO = {Description: 'OPEL-Super', CylindersNumber: 9, Cars: []};
-  carDTO: CarDTO = {Brand: 'Bugatti', Chassis: {Description: 'Bugatti-Chassis', CodeNumber: '50', Cars: []},
-                    Engine: {Description: 'Bugatti-Engine', CylindersNumber: 13, Cars: []}};
+  chassisDTO: ChassisDTO = {Description: 'T6000', CodeNumber: '114', Brands: ['Carapace']};
+ 
+  carDTO: CarDTO = {Brand: 'Bugatti', ChassisDescription: 'Extreme', ChassisCodeNumber: '500',
+                    EngineDescription: 'Bugatti-Engine', EngineCylindersNumber: 13};
+
+  engineDTO: EngineDTO = {Description: 'Motorola', CylindersNumber: 80, Brands: ['Carapace']};
   
   ngOnInit() {
-    
+
       // this.carService.getCar('9F749DDA-2644-4CD7-57C2-08D7C7979A6D').subscribe(data => {
       //     this.carDTO.Chassis.Cars.push(data);
       //     console.log('carDTO modified: ', this.carDTO);
@@ -36,7 +38,11 @@ export class CarListComponent implements OnInit {
       //     //     console.log('Raspuns', data);
       //     // });
       // });
-  
+      // this.carService.updateCar(this.carDTO).subscribe(data =>{
+      //      console.log('Raspuns', data);
+      // });
+      //this.carService.getCars().subscribe(data => console.log('Raspuns', data));
+      this.chassisService.updateChassis(this.chassisDTO).subscribe(data => console.log('Raspuns', data));
   }
 
 

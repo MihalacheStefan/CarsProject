@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using Domain.Models;
 using Repository.Interfaces.UnitOfWork;
@@ -19,6 +20,12 @@ namespace Service.Services
             this.mapper = mapper;
         }
 
+        public IEnumerable<ChassisDTO> GetChassiss()
+        {
+            IEnumerable<Chassis> chassiss = this.unitOfWork.Chassiss.GetAll();
+            return this.mapper.Map<IEnumerable<ChassisDTO>>(chassiss);
+        }
+
         public ChassisDTO GetChassis(Guid Id)
         {
             Chassis chassis = this.unitOfWork.Chassiss.Get(Id);
@@ -28,26 +35,23 @@ namespace Service.Services
         public void InsertChassis(ChassisDTO chassisDTO)
         {
             Chassis chassis = this.mapper.Map<Chassis>(chassisDTO);
-            chassis.ChassisId = Guid.NewGuid();
+            chassis.Cars = this.GetCarsByBrand(chassisDTO.Brands);
             this.unitOfWork.Chassiss.Add(chassis);
             this.unitOfWork.Complete();
         }
 
         public void UpdateChassis(ChassisDTO chassisDTO)
         {
-            Chassis updatedChassis = this.mapper.Map<Chassis>(chassisDTO);
-            Chassis chassis = unitOfWork.Chassiss.GetByCodeNumber(updatedChassis.CodeNumber);
+            Chassis chassis = unitOfWork.Chassiss.GetByCodeNumber(chassisDTO.CodeNumber);
             if (chassis != null)
             {
-                chassis.Description = updatedChassis.Description;
-                chassis.Cars = updatedChassis.Cars;
+                chassis.Description = chassisDTO.Description;
+                chassis.Cars = this.GetCarsByBrand(chassisDTO.Brands);
                 this.unitOfWork.Chassiss.Update(chassis);
                 this.unitOfWork.Complete();
             }
             else
-            {
                 this.InsertChassis(chassisDTO);
-            }
         }
 
         public void DeleteChassis(Guid Id)
@@ -56,5 +60,20 @@ namespace Service.Services
             this.unitOfWork.Chassiss.Remove(chassis);
             this.unitOfWork.Complete();
         }
+
+        private ICollection<Car> GetCarsByBrand(ICollection<string> Brands)
+        {
+            ICollection<Car> Cars = new List<Car>();
+            foreach (var brand in Brands)
+            {
+                var car = this.unitOfWork.Cars.GetByBrand(brand);
+                if (car != null)
+                    Cars.Add(car);
+                else
+                    throw new Exception("Bad Request parameters");
+            }
+            return Cars;
+        }
+
     }
 }

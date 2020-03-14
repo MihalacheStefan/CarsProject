@@ -34,30 +34,38 @@ namespace Service.Services
         public void InsertCar(CarDTO carDTO)
         {
             Car car = this.mapper.Map<Car>(carDTO);
-            //car.CarId = Guid.NewGuid();
+            var chassis = this.unitOfWork.Chassiss.GetByCodeNumber(carDTO.ChassisCodeNumber);
+            if (chassis != null)
+                car.Chassis = chassis;
+            var engine = this.unitOfWork.Engines.GetByCylindersNumber(carDTO.EngineCylindersNumber);
+            if (engine != null)
+                car.Engine = engine;
             this.unitOfWork.Cars.Add(car);
             this.unitOfWork.Complete();
         }
 
         public void UpdateCar(CarDTO carDTO)
         {
-            Car updatedCar = this.mapper.Map<Car>(carDTO);
-            Car car = this.unitOfWork.Cars.GetByBrand(updatedCar.Brand);
+            Car car = this.unitOfWork.Cars.GetByBrand(carDTO.Brand);
             if (car != null)
             {
-                car.Chassis.Description = updatedCar.Chassis.Description;
-                car.Chassis.CodeNumber = updatedCar.Chassis.CodeNumber;
-                car.Chassis.Cars = updatedCar.Chassis.Cars;
-                car.Engine.Description = updatedCar.Engine.Description;
-                car.Engine.CylindersNumber = updatedCar.Engine.CylindersNumber;
-                car.Engine.Cars = updatedCar.Engine.Cars;
+                var chassis = this.unitOfWork.Chassiss.GetByCodeNumber(carDTO.ChassisCodeNumber);
+                if (chassis != null)
+                    car.Chassis = chassis;
+                else
+                    throw new Exception("Bad request Parameters");
+
+                var engine = this.unitOfWork.Engines.GetByCylindersNumber(carDTO.EngineCylindersNumber);
+                if (engine != null)
+                    car.Engine = engine;
+                else
+                    throw new Exception("Bad request Parameters");
+
                 this.unitOfWork.Cars.Update(car);
                 this.unitOfWork.Complete();
             }
             else
-            {
                 this.InsertCar(carDTO);
-            }
         }
 
         public void DeleteCar(Guid Id)

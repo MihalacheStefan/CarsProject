@@ -1,17 +1,19 @@
 export class CarDTO {
     Brand: string;
-    Chassis: ChassisDTO;
-    Engine: EngineDTO;
+    ChassisDescription: string;
+    ChassisCodeNumber: string;
+    EngineDescription: string;
+    EngineCylindersNumber: number;
 }
 
 export class ChassisDTO {
     Description: string;
     CodeNumber: string;
-    Cars: CarDTO[];
+    Brands: string[];
 }
 
 export class EngineDTO {
     Description: string;
     CylindersNumber: number;
-    Cars: CarDTO[];
+    Brands: string[];
 }

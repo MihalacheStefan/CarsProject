@@ -7,7 +7,10 @@ namespace Service.DTO
     public class CarDTO
     {
         public string Brand { get; set; }
-        public ChassisDTO Chassis { get; set; }
-        public EngineDTO Engine { get; set; }
+        public string ChassisDescription { get; set; }
+        public string ChassisCodeNumber { get; set; }
+        public string EngineDescription { get; set; }
+        public int EngineCylindersNumber { get; set; }
+
     }
 }

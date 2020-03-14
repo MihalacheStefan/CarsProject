@@ -8,6 +8,6 @@ namespace Service.DTO
     {
         public string Description { get; set; }
         public int CylindersNumber { get; set; }
-        public IEnumerable<CarDTO> Cars { get; set; }
+        public ICollection<string> Brands { get; set; }
     }
 }
