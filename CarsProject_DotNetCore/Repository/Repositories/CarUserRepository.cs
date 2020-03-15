@@ -1,8 +1,8 @@
-﻿using Domain.Models;
+﻿using System;
+using System.Linq;
+using Domain.Models;
 using Repository.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace Repository.Repositories
 {
@@ -15,6 +15,11 @@ namespace Repository.Repositories
         public AplicationContext AplicationContext
         {
             get { return context as AplicationContext; }
+        }
+
+        public CarUser GetByCarIdAndUserId(Guid CarId, Guid UserId)
+        {
+            return this.context.Set<CarUser>().Where(x => x.CarId == CarId && x.UserId == UserId).SingleOrDefault();
         }
     }
 }

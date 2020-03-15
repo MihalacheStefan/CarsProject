@@ -31,7 +31,7 @@ export class CarListComponent implements OnInit {
 
 //  engineDTO: EngineDTO = {Description: 'Motorola', CylindersNumber: 80, Brands: ['Carapace']};
   
-    userDTO: UserDTO = {Name: 'Ionel', Brands: ['Carapace']};
+    userDTO: UserDTO = {Name: 'Ionel', Brands: ['Bugatti']};
 
   ngOnInit() {
       // this.carService.updateCar(this.carDTO).subscribe(data =>{
@@ -39,8 +39,8 @@ export class CarListComponent implements OnInit {
       // });
       //this.carService.getCars().subscribe(data => console.log('Raspuns', data));
      // this.chassisService.updateChassis(this.chassisDTO).subscribe(data => console.log('Raspuns', data));
-    //  this.userService.updateUser(this.userDTO).subscribe(data => console.log('Raspuns', data));
-    this.userService.deleteUser('F54E4252-C645-451C-98AD-1936F33271BC').subscribe(data => console.log('Raspuns', data));
+      this.userService.updateUser(this.userDTO).subscribe(data => console.log('Raspuns', data));
+      //this.userService.deleteUser('F54E4252-C645-451C-98AD-1936F33271BC').subscribe(data => console.log('Raspuns', data));
   }
 
 

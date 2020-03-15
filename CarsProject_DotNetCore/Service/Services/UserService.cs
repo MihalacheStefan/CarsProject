@@ -49,17 +49,10 @@ namespace Service.Services
                 var updatedCarsUsers = this.GetCarsUsers(user, this.GetCarsByBrand(userDTO.Brands));
 
                 foreach (var carUser in user.CarsUsers)
-                {
                     if (!updatedCarsUsers.Contains(carUser))
-                    {
-                       // carUser.Car.CarsUsers.Remove(carUser);
-                       // carUser.User.CarsUsers.Remove(carUser);
-                        //carUser.CarId = Guid.Empty;
-                        //carUser.UserId = Guid.Empty;
-                        //carUser.CarUserId = Guid.Empty;
-                        //this.unitOfWork.CarsUsers.Remove(carUser);
-                    }
-                }
+                        this.unitOfWork.CarsUsers.Remove(carUser);
+
+                user.CarsUsers = updatedCarsUsers;
                 this.unitOfWork.Users.Update(user);
                 this.unitOfWork.Complete();
             }
@@ -93,16 +86,21 @@ namespace Service.Services
             ICollection<CarUser> carsUsers = new List<CarUser>();
             foreach (var car in cars)
             {
-                var carUser = new CarUser
+                var carUserFromDb = this.unitOfWork.CarsUsers.GetByCarIdAndUserId(car.CarId, user.UserId);
+                if (carUserFromDb != null)
+                    carsUsers.Add(carUserFromDb);
+                else
                 {
-                    Car = car,
-                    User = user
-                };
-                carsUsers.Add(carUser);
+                    var carUser = new CarUser
+                    {
+                        Car = car,
+                        User = user
+                    };
+                    carsUsers.Add(carUser);
+                }
             }
             return carsUsers;
         }
 
-        
     }
 }

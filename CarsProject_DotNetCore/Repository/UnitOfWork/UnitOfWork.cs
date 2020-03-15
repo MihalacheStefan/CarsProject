@@ -12,6 +12,7 @@ namespace Repository.UnitOfWork
         {
             this.context = context;
             Cars = new CarRepository(this.context);
+            CarsUsers = new CarUserRepository(this.context);
             Chassiss = new ChassisRepository(this.context);
             Engines = new EngineRepository(this.context);
             Users = new UserRepository(this.context);
