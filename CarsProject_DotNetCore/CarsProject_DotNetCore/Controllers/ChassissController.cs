@@ -25,10 +25,10 @@ namespace CarsProject_DotNetCore.Controllers
             return this.chassisService.GetChassiss().ToList();
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<ChassisDTO> Get(string id)
+        [HttpGet("{codeNumber}")]
+        public ActionResult<ChassisDTO> Get(string codeNumber)
         {
-            return this.chassisService.GetChassis(Guid.Parse(id));
+            return this.chassisService.GetChassis(codeNumber);
         }
 
         [HttpPost]
@@ -43,10 +43,10 @@ namespace CarsProject_DotNetCore.Controllers
             this.chassisService.UpdateChassis(chassisDTO);
         }
 
-        [HttpDelete("{id}")]
-        public void Delete(string id)
+        [HttpDelete("{codeNumber}")]
+        public void Delete(string codeNumber)
         {
-            this.chassisService.DeleteChassis(Guid.Parse(id));
+            this.chassisService.DeleteChassis(codeNumber);
         }
     }
 }

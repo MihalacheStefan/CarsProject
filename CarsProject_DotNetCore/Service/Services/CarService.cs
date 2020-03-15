@@ -31,6 +31,12 @@ namespace Service.Services
             return this.mapper.Map<CarDTO>(car);
         }
 
+        public CarDTO GetCar(string brand)
+        {
+            var car = this.unitOfWork.Cars.GetByBrand(brand);
+            return this.mapper.Map<CarDTO>(car);
+        }
+
         public void InsertCar(CarDTO carDTO)
         {
             Car car = this.mapper.Map<Car>(carDTO);
@@ -40,6 +46,7 @@ namespace Service.Services
             var engine = this.unitOfWork.Engines.GetByCylindersNumber(carDTO.EngineCylindersNumber);
             if (engine != null)
                 car.Engine = engine;
+            car.CarsUsers = this.GetCarsUsers(car, this.GetUsersByName(carDTO.UsersName));
             this.unitOfWork.Cars.Add(car);
             this.unitOfWork.Complete();
         }
@@ -61,6 +68,12 @@ namespace Service.Services
                 else
                     throw new Exception("Bad request Parameters");
 
+                var updatedCarsUsers = this.GetCarsUsers(car, this.GetUsersByName(carDTO.UsersName));
+                foreach (var carUser in car.CarsUsers)
+                    if (!updatedCarsUsers.Contains(carUser))
+                        this.unitOfWork.CarsUsers.Remove(carUser);
+                car.CarsUsers = updatedCarsUsers;
+
                 this.unitOfWork.Cars.Update(car);
                 this.unitOfWork.Complete();
             }
@@ -73,6 +86,48 @@ namespace Service.Services
             Car car = this.unitOfWork.Cars.Get(Id);
             this.unitOfWork.Cars.Remove(car);
             this.unitOfWork.Complete();
+        }
+
+        public void DeleteCar(string brand)
+        {
+            Car car = this.unitOfWork.Cars.GetByBrand(brand);
+            this.unitOfWork.Cars.Remove(car);
+            this.unitOfWork.Complete();
+        }
+
+        private ICollection<User> GetUsersByName(ICollection<string> names)
+        {
+            ICollection<User> users = new List<User>();
+            foreach (var name in names)
+            {
+                var user = this.unitOfWork.Users.GetByName(name);
+                if (user != null)
+                    users.Add(user);
+                else
+                    throw new Exception("Bad Request parameters");
+            }
+            return users;
+        }
+
+        private ICollection<CarUser> GetCarsUsers(Car car, ICollection<User> users)
+        {
+            ICollection<CarUser> carsUsers = new List<CarUser>();
+            foreach (var user in users)
+            {
+                var carUserFromDb = this.unitOfWork.CarsUsers.GetByCarIdAndUserId(car.CarId, user.UserId);
+                if (carUserFromDb != null)
+                    carsUsers.Add(carUserFromDb);
+                else
+                {
+                    var carUser = new CarUser
+                    {
+                        Car = car,
+                        User = user
+                    };
+                    carsUsers.Add(carUser);
+                }
+            }
+            return carsUsers;
         }
 
     }

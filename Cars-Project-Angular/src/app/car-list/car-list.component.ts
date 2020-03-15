@@ -12,35 +12,20 @@ import { UserService } from '../services/user.service';
 })
 export class CarListComponent implements OnInit {
   selectedCar: CarDTO;
-  private carList;
-  private list = [ {Brand: 'Skoda', Chassis: {Description: 'Skoda-Description', CodeNumber: '1234'},
-                   Engine: {Description: 'EngineDescription', CylindersNr: 3 }},
-                   {Brand: 'Opel', Chassis: {Description: 'Opel-Description', CodeNumber: '1234'},
-                   Engine: {Description: 'EngineDescription', CylindersNr: 5 }}];
+  private carList: CarDTO[];
   constructor(private carService: CarService,
-              private chassisService: ChassisService,
-              private engineService: EngineService,
               private userService: UserService) { }
 
-
-
 //  chassisDTO: ChassisDTO = {Description: 'T6000', CodeNumber: '114', Brands: ['Carapace']};
- 
-    carDTO: CarDTO = {Brand: 'Bugatti', ChassisDescription: 'Extreme', ChassisCodeNumber: '500',
-                      EngineDescription: 'Bugatti-Engine', EngineCylindersNumber: 13, UsersName: ['Ionel']};
-
+    carDTO: CarDTO = {brand: 'BMW', chassisDescription: 'BMW-22', chassisCodeNumber: '22',
+                      engineDescription: 'BMW-10', engineCylindersNumber: 10, usersName: ['Ionel']};
 //  engineDTO: EngineDTO = {Description: 'Motorola', CylindersNumber: 80, Brands: ['Carapace']};
-  
-    userDTO: UserDTO = {Name: 'Ionel', Brands: ['Bugatti']};
+   // userDTO: UserDTO = {Name: 'Ionel', Brands: ['Bugatti']};
 
   ngOnInit() {
-      // this.carService.updateCar(this.carDTO).subscribe(data =>{
-      //      console.log('Raspuns', data);
-      // });
-      //this.carService.getCars().subscribe(data => console.log('Raspuns', data));
-     // this.chassisService.updateChassis(this.chassisDTO).subscribe(data => console.log('Raspuns', data));
-      this.userService.updateUser(this.userDTO).subscribe(data => console.log('Raspuns', data));
-      //this.userService.deleteUser('F54E4252-C645-451C-98AD-1936F33271BC').subscribe(data => console.log('Raspuns', data));
+    this.carService.getCars().subscribe(data => {this.carList = data; console.log(this.carList); });
+
+    this.carService.updateCar(this.carDTO).subscribe(data => console.log('Raspuns', data));
   }
 
 
@@ -50,13 +35,12 @@ export class CarListComponent implements OnInit {
           // this.selectedCar = null;
       } else {
           this.selectedCar = car;
-          console.log(car);
       }
   }
 
-  // deleteCar(car: CarDTO) {
-  //   this.carService.deleteCar(car)
-  //         .subscribe();
-  // }
+  deleteCar(car: CarDTO) {
+    this.carService.deleteCar(car.brand)
+            .subscribe(x => this.carList = this.carList.filter(c => c !== car) );
+  }
 
 }

@@ -1,10 +1,10 @@
 
-<h4>{{carList}}</h4>
+<h4>Car List</h4>
 
 <ul class="carlist">
-    <li *ngFor="let car of list; let i = index" (click)="onSelect(car)">
+    <li *ngFor="let car of carList; let i = index" (click)="onSelect(car)">
             <a>
-            <span class="badge">{{i+1}}</span> {{car.Brand}}
+            <span class="badge">{{i+1}}</span> {{car.brand}}
             </a>
             <button class="delete" title="Delete Car"
             (click)="deleteCar(car)">x</button>

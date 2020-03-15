@@ -21,8 +21,8 @@ export class CarService {
     return this.http.get<CarDTO[]>(this.apiUrl, this.httpOptions);
   }
 
-  getCar(id: string): Observable<CarDTO> {
-    const currentUrl = `${this.apiUrl}/${id}`;
+  getCar(brand: string): Observable<CarDTO> {
+    const currentUrl = `${this.apiUrl}/${brand}`;
     return this.http.get<CarDTO>(currentUrl, this.httpOptions);
   }
 
@@ -34,8 +34,8 @@ export class CarService {
     return this.http.put<CarDTO>(this.apiUrl, carDTO, this.httpOptions);
   }
 
-  deleteCar(id: string) {
-    const currentUrl = `${this.apiUrl}/${id}`;
+  deleteCar(brand: string) {
+    const currentUrl = `${this.apiUrl}/${brand}`;
     return this.http.delete(currentUrl, this.httpOptions);
   }
 }

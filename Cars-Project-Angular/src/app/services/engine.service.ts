@@ -22,8 +22,8 @@ export class EngineService {
         return this.http.get<EngineDTO[]>(this.apiUrl, this.httpOptions);
     }
 
-    getEngine(id: string):  Observable<EngineDTO> {
-        const currentUrl = `${this.apiUrl}/${id}`;
+    getEngine(cylindersNumber: number):  Observable<EngineDTO> {
+        const currentUrl = `${this.apiUrl}/${cylindersNumber}`;
         return this.http.get<EngineDTO>(currentUrl, this.httpOptions);
     }
 
@@ -35,8 +35,8 @@ export class EngineService {
         return this.http.put<EngineDTO>(this.apiUrl, engineDTO, this.httpOptions);
     }
     
-    deleteEngine(id: string) {
-        const currentUrl = `${this.apiUrl}/${id}`;
+    deleteEngine(cylindersNumber: number) {
+        const currentUrl = `${this.apiUrl}/${cylindersNumber}`;
         return this.http.delete(currentUrl, this.httpOptions);
     }
 }

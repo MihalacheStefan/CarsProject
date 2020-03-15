@@ -25,10 +25,10 @@ namespace CarsProject_DotNetCore.Controllers
             return this.engineService.GetEngines().ToList();
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<EngineDTO> Get(string id)
+        [HttpGet("{cylindersNumber}")]
+        public ActionResult<EngineDTO> Get(int cylindersNumber)
         {
-            return this.engineService.GetEngine(Guid.Parse(id));
+            return this.engineService.GetEngine(cylindersNumber);
         }
 
         [HttpPost]
@@ -43,10 +43,10 @@ namespace CarsProject_DotNetCore.Controllers
             this.engineService.UpdateEngine(engineDTO);
         }
 
-        [HttpDelete("{id}")]
-        public void Delete(string id)
+        [HttpDelete("{cylindersNumber}")]
+        public void Delete(int cylindersNumber)
         {
-            this.engineService.DeleteEngine(Guid.Parse(id));
+            this.engineService.DeleteEngine(cylindersNumber);
         }
     }
 }

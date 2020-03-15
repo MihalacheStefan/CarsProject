@@ -21,8 +21,8 @@ export class UserService {
         return this.http.get<UserDTO[]>(this.apiUrl, this.httpOptions);
     }
 
-    getUser(id: string): Observable<UserDTO> {
-        const currentUrl = `${this.apiUrl}/${id}`;
+    getUser(name: string): Observable<UserDTO> {
+        const currentUrl = `${this.apiUrl}/${name}`;
         return this.http.get<UserDTO>(currentUrl, this.httpOptions);
     }
 
@@ -34,8 +34,8 @@ export class UserService {
         return this.http.put<UserDTO>(this.apiUrl, userDTO, this.httpOptions);
     }
 
-    deleteUser(id: string) {
-        const currentUrl = `${this.apiUrl}/${id}`;
+    deleteUser(name: string) {
+        const currentUrl = `${this.apiUrl}/${name}`;
         return this.http.delete(currentUrl, this.httpOptions);
     }
 }

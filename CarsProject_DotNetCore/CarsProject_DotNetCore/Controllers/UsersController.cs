@@ -25,10 +25,10 @@ namespace CarsProject_DotNetCore.Controllers
             return this.userService.GetUsers().ToList();
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<UserDTO> Get(string id)
+        [HttpGet("{name}")]
+        public ActionResult<UserDTO> Get(string name)
         {
-            return this.userService.GetUser(Guid.Parse(id));
+            return this.userService.GetUser(name);
         }
 
         [HttpPost]
@@ -43,10 +43,10 @@ namespace CarsProject_DotNetCore.Controllers
             this.userService.UpdateUser(userDTO);
         }
 
-        [HttpDelete("{id}")]
-        public void Delete(string id)
+        [HttpDelete("{name}")]
+        public void Delete(string name)
         {
-            this.userService.DeleteUser(Guid.Parse(id));
+            this.userService.DeleteUser(name);
         }
 
     }

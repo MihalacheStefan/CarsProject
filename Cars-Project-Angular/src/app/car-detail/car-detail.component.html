@@ -1,18 +1,17 @@
 <div *ngIf="car">
-    <h3>{{car.Brand | uppercase}} Details</h3>
+    <h3>{{car.brand | uppercase}} Details</h3>
     
     <div (click)="clickChassis()">
         <h4>Chassis</h4>
         <div *ngIf="clickedChassis">    
-            <app-chassis-detail [chassis] = "car.Chassis"></app-chassis-detail>
+            <app-chassis-detail [chassisDescription]="car.chassisDescription" [chassisCodeNumber]="car.chassisCodeNumber"></app-chassis-detail>
         </div>
     </div>
     <div (click) = "clickEngine()">
         <h4>Engine</h4>
         <div *ngIf="clickedEngine">
-            <app-engine-detail [engine] = "car.Engine"></app-engine-detail>
+            <app-engine-detail [engineDescription]="car.engineDescription" [engineCylindersNumber]="car.engineCylindersNumber"></app-engine-detail>
         </div>
     </div>
-    
-  
-  </div>
+
+</div>

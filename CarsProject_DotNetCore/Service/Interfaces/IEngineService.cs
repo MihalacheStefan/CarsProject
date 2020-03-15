@@ -9,8 +9,11 @@ namespace Service.Interfaces
     {
         IEnumerable<EngineDTO> GetEngines();
         EngineDTO GetEngine(Guid Id);
+        EngineDTO GetEngine(int cylindersNumber);
         void InsertEngine(EngineDTO engineDTO);
         void UpdateEngine(EngineDTO engineDTO);
         void DeleteEngine(Guid Id);
+        void DeleteEngine(int cylindersNumber);
+
     }
 }

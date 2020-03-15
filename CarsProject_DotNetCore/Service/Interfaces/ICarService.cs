@@ -8,8 +8,10 @@ namespace Service.Interfaces
     {
         IEnumerable<CarDTO> GetCars();
         CarDTO GetCar(Guid Id);
+        CarDTO GetCar(string brand);
         void InsertCar(CarDTO carDTO);
         void UpdateCar(CarDTO carDTO);
         void DeleteCar(Guid Id);
+        void DeleteCar(string brand);
     }
 }

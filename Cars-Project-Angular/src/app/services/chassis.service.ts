@@ -22,8 +22,8 @@ export class ChassisService {
       return this.http.get<ChassisDTO[]>(this.apiUrl, this.httpOptions);
     }
 
-    getChassis(id: string): Observable<ChassisDTO> {
-        const currentUrl = `${this.apiUrl}/${id}`;
+    getChassis(codeNumber: string): Observable<ChassisDTO> {
+        const currentUrl = `${this.apiUrl}/${codeNumber}`;
         return this.http.get<ChassisDTO>(currentUrl, this.httpOptions);
     }
 
@@ -35,8 +35,8 @@ export class ChassisService {
         return this.http.put<ChassisDTO>(this.apiUrl, chassisDTO, this.httpOptions);
     }
 
-    deleteChassis(id: string) {
-        const currentUrl = `${this.apiUrl}/${id}`;
+    deleteChassis(codeNumber: string) {
+        const currentUrl = `${this.apiUrl}/${codeNumber}`;
         return this.http.delete(currentUrl, this.httpOptions);
     }
 }

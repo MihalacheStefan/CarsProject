@@ -7,7 +7,8 @@ import { EngineDTO } from '../DTOs/DTOs';
   styleUrls: ['./engine-detail.component.css']
 })
 export class EngineDetailComponent implements OnInit {
-  @Input() engine: EngineDTO;
+  @Input() engineDescription: string;
+  @Input() engineCylindersNumber: number;
   constructor() { }
 
   ngOnInit() {

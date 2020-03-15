@@ -7,7 +7,8 @@ import { ChassisDTO } from '../DTOs/DTOs';
   styleUrls: ['./chassis-detail.component.css']
 })
 export class ChassisDetailComponent implements OnInit {
-  @Input() chassis: ChassisDTO;
+  @Input() chassisDescription: string ;
+  @Input() chassisCodeNumber: string ;
   constructor() { }
 
   ngOnInit() {

@@ -32,6 +32,12 @@ namespace Service.Services
             return this.mapper.Map<UserDTO>(user);
         }
 
+        public UserDTO GetUser(string name)
+        {
+            User user = this.unitOfWork.Users.GetByName(name);
+            return this.mapper.Map<UserDTO>(user);
+        }
+
         public void InsertUser(UserDTO userDTO)
         {
             User user = this.mapper.Map<User>(userDTO);
@@ -67,10 +73,17 @@ namespace Service.Services
             this.unitOfWork.Complete();
         }
 
-        private ICollection<Car> GetCarsByBrand(ICollection<string> Brands)
+        public void DeleteUser(string name)
+        {
+            User user = this.unitOfWork.Users.GetByName(name);
+            this.unitOfWork.Users.Remove(user);
+            this.unitOfWork.Complete();
+        }
+
+        private ICollection<Car> GetCarsByBrand(ICollection<string> brands)
         {
             ICollection<Car> cars = new List<Car>();
-            foreach (var brand in Brands)
+            foreach (var brand in brands)
             {
                 var car = this.unitOfWork.Cars.GetByBrand(brand);
                 if (car != null)

@@ -33,6 +33,12 @@ namespace Service.Services
             return this.mapper.Map<EngineDTO>(engine);
         }
 
+        public EngineDTO GetEngine(int cylindersNumber)
+        {
+            Engine engine = this.unitOfWork.Engines.GetByCylindersNumber(cylindersNumber);
+            return this.mapper.Map<EngineDTO>(engine);
+        }
+
         public void InsertEngine(EngineDTO engineDTO)
         {
             Engine engine = this.mapper.Map<Engine>(engineDTO);
@@ -58,6 +64,13 @@ namespace Service.Services
         public void DeleteEngine(Guid Id)
         {
             Engine engine = this.unitOfWork.Engines.Get(Id);
+            this.unitOfWork.Engines.Remove(engine);
+            this.unitOfWork.Complete();
+        }
+
+        public void DeleteEngine(int cylindersNumber)
+        {
+            Engine engine = this.unitOfWork.Engines.GetByCylindersNumber(cylindersNumber);
             this.unitOfWork.Engines.Remove(engine);
             this.unitOfWork.Complete();
         }
