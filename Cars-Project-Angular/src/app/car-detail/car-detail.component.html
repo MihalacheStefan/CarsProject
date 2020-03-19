@@ -14,4 +14,11 @@
         </div>
     </div>
 
+    <div (click) = "clickUsers()">
+        <h4>Users</h4>
+        <div *ngIf="clickedUsers">
+            <app-user-list-detail [usersName]="car.usersName"></app-user-list-detail>
+        </div>
+    </div>
+
 </div>

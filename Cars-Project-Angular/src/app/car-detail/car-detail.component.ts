@@ -11,12 +11,14 @@ export class CarDetailComponent implements OnInit {
   @Input() car: CarDTO;
   clickedChassis = true;
   clickedEngine = true;
+  clickedUsers = true;
   constructor(
     private carService: CarService
   ) { }
 
   ngOnInit() {
   }
+
   clickChassis() {
     if(this.clickedChassis) {
         this.clickedChassis = false;
@@ -24,6 +26,7 @@ export class CarDetailComponent implements OnInit {
         this.clickedChassis = true;
     }
   }
+
   clickEngine() {
     if(this.clickedEngine){
         this.clickedEngine = false;
@@ -31,4 +34,13 @@ export class CarDetailComponent implements OnInit {
         this.clickedEngine = true;
     }
   }
+
+  clickUsers() {
+    if(this.clickedUsers){
+        this.clickedUsers = false;
+    } else {
+        this.clickedUsers = true;
+    }
+  }
+
 }
