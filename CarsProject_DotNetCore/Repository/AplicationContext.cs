@@ -9,12 +9,7 @@ namespace Repository
         public AplicationContext(DbContextOptions<AplicationContext> options) : base(options)
         {
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS; Initial Catalog=CarsProjectDB;Integrated Security=True")
-                .UseLazyLoadingProxies();
-        }
-
+        
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<CarUser> CarsUsers { get; set; }
         public virtual DbSet<Chassis> Chassiss { get; set; }

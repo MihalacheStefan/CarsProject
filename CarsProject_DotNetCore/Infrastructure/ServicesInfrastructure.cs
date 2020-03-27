@@ -32,7 +32,11 @@ namespace Infrastructure
         public void ConfigureServices()
         {
 
-            this.services.AddDbContext<AplicationContext>();
+            this.services.AddDbContext<AplicationContext>((sp, options) =>
+                {
+                    options.UseSqlServer(@"Data Source=.\SQLEXPRESS; Initial Catalog=CarsProjectDB;Integrated Security=True")
+                        .UseLazyLoadingProxies();
+                });
 
             var mappingConfig = new MapperConfiguration(mc =>               // Auto Mapper Configurations
             {
@@ -54,8 +58,13 @@ namespace Infrastructure
         {
             this.builder.Populate(this.services);
 
-            this.builder.Register((c,p)=> new DbContextOptions<AplicationContext>());
+            this.builder.Register((c,p)=> 
+                new DbContextOptionsBuilder<AplicationContext>()
+                    .UseSqlServer(@"Data Source=.\SQLEXPRESS; Initial Catalog=CarsProjectDB;Integrated Security=True")
+                    .UseLazyLoadingProxies());
+
             this.builder.RegisterType<AplicationContext>();
+
             this.builder.Register((c,p) => 
                  new UnitOfWork(c.Resolve<AplicationContext>()))
                  .As<IUnitOfWork>();

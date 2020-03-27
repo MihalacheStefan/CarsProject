@@ -20,15 +20,16 @@ namespace Repository.Tests.UnitOfWork
             AplicationContextMock = new Mock<AplicationContext>(new DbContextOptions<AplicationContext>());
         }
 
-        [TestMethod]
-        public void UnitOfWork_Is_Instance_Of_IUnitOfWork()
-        {
-            //var IUnitOfWork = new UnitOfWork(AplicationContextMock.Object);
+        //[TestMethod]
+        //public void UnitOfWork_Is_Instance_Of_IUnitOfWork()
+        //{
+        //    //var UnitOfWork = new UnitOfWork(AplicationContextMock.Object);
 
-            //Type obj = unitOfWork.GetType();
+        //    //Type obj = unitOfWork.GetType();
 
-            //Assert.IsInstanceOfType(unitOfWork, obj.GetInterface("IUnitOfWork"));
-        }
+        //    //Assert.IsInstanceOfType(unitOfWork, obj.GetInterface("IUnitOfWork"));
+        //    throw new NotImplementedException("Not Implemented yet");
+        //}
 
     }
 }

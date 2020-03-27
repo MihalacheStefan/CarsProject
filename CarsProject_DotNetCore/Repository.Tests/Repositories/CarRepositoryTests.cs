@@ -1,18 +1,15 @@
-﻿using System.Linq;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Domain.Models;
 using Repository.Repositories;
-using Repository.Interfaces.Repositories;
-using System;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+
 
 namespace Repository.Tests.Repositories
 {
     [TestClass]
-    public class CarRepositoryTests
+    public class CarRepositoryTests 
     {
         private Mock<DbSet<Car>> dbSetMock;
         private Mock<AplicationContext> AplicationContextMock;
@@ -65,5 +62,6 @@ namespace Repository.Tests.Repositories
             dbSetMock.Reset();
             AplicationContextMock.Reset();
         }
+
     }
 }
