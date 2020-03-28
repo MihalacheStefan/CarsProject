@@ -9,7 +9,7 @@ namespace Repository.Tests.Common
         public static AplicationContext Create()
         {
             var options = new DbContextOptionsBuilder<AplicationContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())     //In Memory does not suport relational database
                 .Options;
             
             var context = new AplicationContext(options);
