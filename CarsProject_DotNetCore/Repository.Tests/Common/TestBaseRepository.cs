@@ -3,12 +3,12 @@
 
 namespace Repository.Tests.Common
 {
-    public class TestBase : IDisposable
+    public class TestBaseRepository : IDisposable
     {
         protected AplicationContext context;
         private readonly AplicationContextFactory contextFactory;
 
-        public TestBase()
+        public TestBaseRepository()
         {
             contextFactory = new AplicationContextFactory();
         }

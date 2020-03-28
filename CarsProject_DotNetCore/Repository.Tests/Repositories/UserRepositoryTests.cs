@@ -9,7 +9,7 @@ using Repository.Tests.Common;
 namespace Repository.Tests.Repositories
 {
     [TestClass]
-    public class UserRepositoryTests : TestBase
+    public class UserRepositoryTests : TestBaseRepository
     {
         [TestMethod]
         public void ShouldReturnUserFromGetMethod()

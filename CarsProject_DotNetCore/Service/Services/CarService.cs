@@ -53,6 +53,8 @@ namespace Service.Services
 
         public void UpdateCar(CarDTO carDTO)
         {
+            if (carDTO.Brand == null)
+                throw new Exception("Bad request Parameters");
             Car car = this.unitOfWork.Cars.GetByBrand(carDTO.Brand);
             if (car != null)
             {
@@ -104,7 +106,7 @@ namespace Service.Services
                 if (user != null)
                     users.Add(user);
                 else
-                    throw new Exception("Bad Request parameters");
+                    throw new Exception("Bad Request parameters - No such User");
             }
             return users;
         }
