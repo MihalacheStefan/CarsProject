@@ -5,16 +5,30 @@ namespace Repository.Tests.Common
 {
     public class TestBase : IDisposable
     {
-        protected readonly AplicationContext _context;
+        protected AplicationContext context;
+        private readonly AplicationContextFactory contextFactory;
 
         public TestBase()
         {
-            _context = AplicationContextFactory.Create();
+            contextFactory = new AplicationContextFactory();
+        }
+
+        public AplicationContext GetInMemoryAplicationContext()
+        {
+            this.context = contextFactory.Create();
+            return this.context;
+        }
+
+        public AplicationContext GetSqliteAplicationContext()
+        {
+            this.contextFactory.UseSqlite();
+            this.context = contextFactory.Create();
+            return this.context;
         }
 
         public void Dispose()
         {
-            AplicationContextFactory.Destroy(_context);
+            contextFactory.Destroy(context);
         }
     }
 }
