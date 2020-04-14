@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CarDTO } from '../DTOs/DTOs';
+import { CarDTO } from '../../DTOs/DTOs';
 
 @Component({
   selector: 'app-car-detail',
