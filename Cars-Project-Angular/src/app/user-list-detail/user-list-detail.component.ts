@@ -5,11 +5,8 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './user-list-detail.component.html',
   styleUrls: ['./user-list-detail.component.css']
 })
-export class UserListDetailComponent implements OnInit {
+export class UserListDetailComponent {
   @Input() usersName: string[];
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

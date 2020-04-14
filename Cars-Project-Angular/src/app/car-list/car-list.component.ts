@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from '../services/car.service';
-import { CarDTO, ChassisDTO, EngineDTO, UserDTO } from '../DTOs/DTOs';
-import { ChassisService } from '../services/chassis.service';
-import { EngineService } from '../services/engine.service';
-import { UserService } from '../services/user.service';
+import { CarDTO } from '../DTOs/DTOs';
+
 
 @Component({
   selector: 'app-car-list',
@@ -20,9 +18,7 @@ export class CarListComponent implements OnInit {
   }
 
   onSelect(car: CarDTO) {
-      if (car === this.selectedCar) {
-          // this.selectedCar = null;
-      } else {
+      if (car !== this.selectedCar) {
           this.selectedCar = car;
       }
   }

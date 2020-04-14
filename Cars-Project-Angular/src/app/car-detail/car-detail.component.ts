@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CarService } from '../services/car.service';
 import { CarDTO } from '../DTOs/DTOs';
 
 @Component({
@@ -7,17 +6,13 @@ import { CarDTO } from '../DTOs/DTOs';
   templateUrl: './car-detail.component.html',
   styleUrls: ['./car-detail.component.css']
 })
-export class CarDetailComponent implements OnInit {
+export class CarDetailComponent {
   @Input() car: CarDTO;
   clickedChassis = true;
   clickedEngine = true;
   clickedUsers = true;
-  constructor(
-    private carService: CarService
-  ) { }
 
-  ngOnInit() {
-  }
+  constructor() { }
 
   clickChassis() {
     if(this.clickedChassis) {
