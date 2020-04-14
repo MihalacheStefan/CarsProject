@@ -1,7 +1,8 @@
 import { Directive, ViewContainerRef  } from '@angular/core';
 
 @Directive({
-  selector: '[appAd]'
+  // tslint:disable-next-line: directive-selector
+  selector: '[ad-host]'
 })
 export class AdDirective {
 

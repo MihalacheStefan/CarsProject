@@ -10,6 +10,8 @@ import { ChassisDetailComponent } from './Cars/chassis-detail/chassis-detail.com
 import { EngineDetailComponent } from './Cars/engine-detail/engine-detail.component';
 import { UserListDetailComponent } from './Cars/user-list-detail/user-list-detail.component';
 import { AdDirective } from './ad.directive';
+import { AdBannerComponent } from './Ads/ad-banner/ad-banner.component';
+import { ChassisAdComponent } from './Ads/chassis-ad/chassis-ad.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +21,11 @@ import { AdDirective } from './ad.directive';
     ChassisDetailComponent,
     EngineDetailComponent,
     UserListDetailComponent,
-    AdDirective
+    AdDirective,
+    AdBannerComponent,
+    ChassisAdComponent
   ],
+  entryComponents: [ ChassisAdComponent, ],
   imports: [
     BrowserModule,
     AppRoutingModule,
