@@ -1,7 +1,6 @@
-﻿using Domain.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using Domain.Models;
 using Repository.Interfaces.Repositories;
-using System.Linq;
 
 namespace Repository.Repositories
 {

@@ -1,8 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using Domain.Models;
 using Service.DTO;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Infrastructure.AutoMapper
 {

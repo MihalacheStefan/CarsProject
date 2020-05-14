@@ -1,5 +1,4 @@
-﻿using Infrastructure;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 
@@ -7,7 +6,6 @@ namespace CarsProject_DotNetCore
 {
     public class Program
     {
-
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();

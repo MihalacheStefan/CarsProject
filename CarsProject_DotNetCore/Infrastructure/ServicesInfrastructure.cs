@@ -1,18 +1,18 @@
 ﻿using System;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Infrastructure.AutoMapper;
 using Repository;
 using Repository.Interfaces.UnitOfWork;
 using Repository.UnitOfWork;
 using Service.Interfaces;
 using Service.Services;
-using Infrastructure.AutoMapper;
 
 namespace Infrastructure
 {
